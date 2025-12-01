@@ -1,0 +1,35 @@
+<!-- FIXED: Changed strokeWidth from "3dp" to "3" because VectorDrawable strokeWidth expects a float value in viewport units, not dimension units -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M100,100m-90,0a90,90 0,1,1 180,0a90,90 0,1,1 -180,0" />
+    
+    <!-- Phone outline with wave -->
+    <path
+        android:fillColor="#4A9FE8"
+        android:pathData="M70,50 L60,55 L60,145 L70,150 L80,150 L80,145 L80,55 L70,50 Z" />
+    
+    <path
+        android:fillColor="#4A9FE8"
+        android:pathData="M90,45 L85,50 L85,150 L90,155 L105,155 L105,150 L105,50 L90,45 Z" />
+    
+    <!-- Wave design -->
+    <path
+        android:fillColor="#4A9FE8"
+        android:pathData="M115,90 Q125,75 135,90 Q145,105 155,90 L155,100 Q145,115 135,100 Q125,85 115,100 Z"
+        android:strokeWidth="3"
+        android:strokeColor="#4A9FE8" />
+    
+    <!-- Phone button - FIXED: Converted SVG <circle> to Android VectorDrawable <path>
+         Original SVG circle with cx="95" cy="135" radius="4" converted to circular path -->
+    <path
+        android:fillColor="#2C3E50"
+        android:pathData="M95,131 A4,4 0,1,1 95,139 A4,4 0,1,1 95,131 Z" />
+        
+</vector>

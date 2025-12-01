@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Ecommerce-App</string>
+    
+    <!-- Splash Screen -->
+    <string name="brand_name">MACKTECH</string>
+    <string name="tagline">MOBILES (Pvt) Ltd</string>
+    <string name="get_started">Let\'s get started</string>
+    <string name="already_have_account">I already have an account</string>
+    <string name="app_logo">App Logo</string>
+    <string name="arrow_icon">Arrow Icon</string>
+</resources>
