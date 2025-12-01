@@ -19,10 +19,12 @@
     <color name="text_light">#9CA3AF</color>
     
     <!-- Background Colors -->
+    <color name="background">#FFFFFF</color>
     <color name="background_light">#F9FAFB</color>
     <color name="background_card">#FFFFFF</color>
     
     <!-- Border Colors -->
+    <color name="border">#E0E0E0</color>
     <color name="border_light">#E5E7EB</color>
     
     <!-- Icon Colors -->

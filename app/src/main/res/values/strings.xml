@@ -12,6 +12,7 @@
     <!-- Bottom Navigation -->
     <string name="nav_home">Home</string>
     <string name="nav_category">Category</string>
+    <string name="nav_my_order">My Orders</string>
     <string name="nav_favorite">Favorite</string>
     <string name="nav_profile">My Profile</string>
     
@@ -24,4 +25,19 @@
     <!-- Category Screen -->
     <string name="products">Product</string>
     <string name="products_count">%d Product</string>
+    
+    <!-- My Orders Screen -->
+    <string name="my_orders">My Orders</string>
+    <string name="my_orders_subtitle">Track and manage your orders</string>
+    <string name="all_orders">All</string>
+    <string name="pending">Pending</string>
+    <string name="processing">Processing</string>
+    <string name="completed">Completed</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="no_orders">No orders yet</string>
+    <string name="order_date">Order Date:</string>
+    <string name="items">Items:</string>
+    <string name="total">Total:</string>
+    <string name="view_details">View Details</string>
+    <string name="track_order">Track Order</string>
 </resources>

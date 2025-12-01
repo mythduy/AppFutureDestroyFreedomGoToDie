@@ -7,9 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
-import com.example.ecommerce_app.fragments.CategoryFragment;
 import com.example.ecommerce_app.fragments.FavoriteFragment;
 import com.example.ecommerce_app.fragments.HomeFragment;
+import com.example.ecommerce_app.fragments.MyOrderFragment;
 import com.example.ecommerce_app.fragments.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -43,8 +43,8 @@ public class HomeActivity extends AppCompatActivity {
 
                 if (itemId == R.id.nav_home) {
                     fragment = new com.example.ecommerce_app.fragments.HomeFragment();
-                } else if (itemId == R.id.nav_category) {
-                    fragment = new com.example.ecommerce_app.fragments.CategoryFragment();
+                } else if (itemId == R.id.nav_my_order) {
+                    fragment = new com.example.ecommerce_app.fragments.MyOrderFragment();
                 } else if (itemId == R.id.nav_favorite) {
                     fragment = new com.example.ecommerce_app.fragments.FavoriteFragment();
                 } else if (itemId == R.id.nav_profile) {
