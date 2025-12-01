@@ -8,4 +8,24 @@
     <color name="brand_blue_light">#6BB3ED</color>
     <color name="dark_background">#1E2A38</color>
     <color name="dark_background_light">#2C3E50</color>
+    
+    <!-- Primary Colors -->
+    <color name="primary_purple">#6055D8</color>
+    <color name="primary_purple_light">#7C6FE8</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#1E1E1E</color>
+    <color name="text_secondary">#6B7280</color>
+    <color name="text_light">#9CA3AF</color>
+    
+    <!-- Background Colors -->
+    <color name="background_light">#F9FAFB</color>
+    <color name="background_card">#FFFFFF</color>
+    
+    <!-- Border Colors -->
+    <color name="border_light">#E5E7EB</color>
+    
+    <!-- Icon Colors -->
+    <color name="icon_inactive">#9CA3AF</color>
+    <color name="icon_active">#6055D8</color>
 </resources>

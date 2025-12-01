@@ -57,15 +57,24 @@ public class AuthViewModel extends AndroidViewModel {
             User user = userRepository.login(username, password).get();
             
             if (user != null) {
-                currentUser.setValue(user);
-                errorMessage.setValue(null);
+                currentUser.postValue(user);
+                errorMessage.postValue(null);
             } else {
-                errorMessage.setValue("Sai tên đăng nhập hoặc mật khẩu");
+                currentUser.postValue(null);
+                errorMessage.postValue("Sai tên đăng nhập hoặc mật khẩu");
             }
-        } catch (ExecutionException | InterruptedException e) {
-            errorMessage.setValue("Lỗi đăng nhập: " + e.getMessage());
+        } catch (ExecutionException e) {
+            errorMessage.postValue("Lỗi đăng nhập: " + (e.getCause() != null ? e.getCause().getMessage() : e.getMessage()));
+            android.util.Log.e("AuthViewModel", "Login error", e);
+        } catch (InterruptedException e) {
+            errorMessage.postValue("Đăng nhập bị gián đoạn");
+            android.util.Log.e("AuthViewModel", "Login interrupted", e);
+            Thread.currentThread().interrupt();
+        } catch (Exception e) {
+            errorMessage.postValue("Lỗi không xác định: " + e.getMessage());
+            android.util.Log.e("AuthViewModel", "Unexpected login error", e);
         } finally {
-            isLoading.setValue(false);
+            isLoading.postValue(false);
         }
     }
     

@@ -4,9 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.ecommerce_app"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.ecommerce_app"
@@ -53,6 +51,12 @@ dependencies {
     
     // BCrypt for password hashing
     implementation(libs.bcrypt)
+    
+    // ViewPager2 for banner carousel
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    
+    // CircleImageView for profile images
+    implementation("de.hdodenhof:circleimageview:3.1.0")
     
     // Testing
     testImplementation(libs.junit)

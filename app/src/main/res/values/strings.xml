@@ -8,4 +8,20 @@
     <string name="already_have_account">I already have an account</string>
     <string name="app_logo">App Logo</string>
     <string name="arrow_icon">Arrow Icon</string>
+    
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_category">Category</string>
+    <string name="nav_favorite">Favorite</string>
+    <string name="nav_profile">My Profile</string>
+    
+    <!-- Home Screen -->
+    <string name="greeting">Hi, %s</string>
+    <string name="lets_go_shopping">Let\'s go shopping</string>
+    <string name="new_arrivals">New Arrivals 🔥</string>
+    <string name="see_all">See All</string>
+    
+    <!-- Category Screen -->
+    <string name="products">Product</string>
+    <string name="products_count">%d Product</string>
 </resources>

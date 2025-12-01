@@ -3,6 +3,7 @@ package com.example.ecommerce_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,10 +56,19 @@ public class LoginActivity extends AppCompatActivity {
         // Observe login status
         authViewModel.getCurrentUser().observe(this, user -> {
             if (user != null) {
-                // Login thành công, chuyển đến MainActivity
+                // Login thành công, chuyển đến HomeActivity
+                Log.d("LoginActivity", "Login successful, user: " + user.getUsername());
                 Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                // TODO: Navigate to MainActivity
-                finish();
+                
+                try {
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                } catch (Exception e) {
+                    Log.e("LoginActivity", "Error starting HomeActivity", e);
+                    Toast.makeText(this, "Lỗi: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -102,13 +112,20 @@ public class LoginActivity extends AppCompatActivity {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
+        Log.d("LoginActivity", "Attempting login for: " + email);
+
         // Validate inputs
         if (!validateInputs(email, password)) {
             return;
         }
 
         // Perform login
-        authViewModel.login(email, password);
+        try {
+            authViewModel.login(email, password);
+        } catch (Exception e) {
+            Log.e("LoginActivity", "Error calling login", e);
+            Toast.makeText(this, "Lỗi: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean validateInputs(String email, String password) {

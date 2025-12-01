@@ -3,11 +3,15 @@ package com.example.ecommerce_app.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Looper;
+import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
 
 /**
  * ImageHelper - Utility class để làm việc với ảnh từ assets
@@ -41,6 +45,51 @@ public class ImageHelper {
             e.printStackTrace();
             return null;
         }
+    }
+    
+    /**
+     * Load image from assets asynchronously and set it into ImageView
+     * This overload allows direct loading into ImageView without blocking UI thread
+     * 
+     * @param context Application context (must not be null)
+     * @param assetPath Full path to image in assets (e.g., "images/products/product_1.jpg")
+     * @param targetImageView ImageView to display the loaded image (must not be null)
+     */
+    public static void loadImageFromAssets(final Context context, final String assetPath, final ImageView targetImageView) {
+        // Null safety checks
+        if (context == null || assetPath == null || targetImageView == null) {
+            return;
+        }
+        
+        // Load image off the main thread
+        Executors.newSingleThreadExecutor().execute(() -> {
+            Bitmap bitmap = null;
+            try (InputStream is = context.getAssets().open(assetPath)) {
+                bitmap = BitmapFactory.decodeStream(is);
+            } catch (IOException e) {
+                // Image not found or error reading - will use fallback
+            } catch (Exception e) {
+                // Other exceptions - will use fallback
+            }
+            
+            // Post result back to UI thread
+            final Bitmap finalBitmap = bitmap;
+            new Handler(Looper.getMainLooper()).post(() -> {
+                if (finalBitmap != null) {
+                    targetImageView.setImageBitmap(finalBitmap);
+                } else {
+                    // Fallback: try to find placeholder drawable
+                    int placeholderId = context.getResources().getIdentifier(
+                            "ic_image_placeholder", "drawable", context.getPackageName());
+                    if (placeholderId != 0) {
+                        targetImageView.setImageResource(placeholderId);
+                    } else {
+                        // No placeholder found, set to null (will show nothing)
+                        targetImageView.setImageDrawable(null);
+                    }
+                }
+            });
+        });
     }
     
     /**
