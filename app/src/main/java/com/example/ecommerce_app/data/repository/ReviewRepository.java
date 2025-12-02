@@ -7,7 +7,10 @@ import androidx.lifecycle.LiveData;
 import com.example.ecommerce_app.data.dao.ReviewDao;
 import com.example.ecommerce_app.data.database.AppDatabase;
 import com.example.ecommerce_app.data.entities.Review;
+import com.example.ecommerce_app.data.entities.User;
+import com.example.ecommerce_app.data.models.ReviewWithUser;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -63,6 +66,15 @@ public class ReviewRepository {
             review.setComment(comment);
             
             return reviewDao.insert(review);
+        });
+    }
+    
+    /**
+     * Insert review trực tiếp
+     */
+    public void insert(Review review) {
+        AppDatabase.databaseWriteExecutor.execute(() -> {
+            reviewDao.insert(review);
         });
     }
     
@@ -123,5 +135,42 @@ public class ReviewRepository {
      */
     public LiveData<List<Review>> getReviewsByRating(long productId, int rating) {
         return reviewDao.getReviewsByRating(productId, rating);
+    }
+    
+    /**
+     * Lấy reviews với user info
+     * Map manually vì Room không tự động map ReviewWithUser
+     */
+    public Future<List<ReviewWithUser>> getReviewsWithUser(long productId) {
+        return AppDatabase.databaseWriteExecutor.submit(() -> {
+            List<Review> reviews = reviewDao.getReviewsWithUserSync(productId);
+            List<ReviewWithUser> result = new ArrayList<>();
+            
+            for (Review review : reviews) {
+                User user = AppDatabase.getInstance(null).userDao().getUserByIdSync(review.getUserId());
+                ReviewWithUser reviewWithUser = new ReviewWithUser(review, user);
+                result.add(reviewWithUser);
+            }
+            
+            return result;
+        });
+    }
+    
+    /**
+     * Lấy reviews với user info (giới hạn số lượng)
+     */
+    public Future<List<ReviewWithUser>> getReviewsWithUserLimit(long productId, int limit) {
+        return AppDatabase.databaseWriteExecutor.submit(() -> {
+            List<Review> reviews = reviewDao.getReviewsWithUserLimitSync(productId, limit);
+            List<ReviewWithUser> result = new ArrayList<>();
+            
+            for (Review review : reviews) {
+                User user = AppDatabase.getInstance(null).userDao().getUserByIdSync(review.getUserId());
+                ReviewWithUser reviewWithUser = new ReviewWithUser(review, user);
+                result.add(reviewWithUser);
+            }
+            
+            return result;
+        });
     }
 }

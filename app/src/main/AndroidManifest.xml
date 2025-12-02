@@ -45,6 +45,13 @@
             android:windowSoftInputMode="adjustResize">
         </activity>
         
+        <!-- Welcome Activity -->
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcommerceApp">
+        </activity>
+        
         <!-- Home Activity -->
         <activity
             android:name=".HomeActivity"
@@ -66,6 +73,34 @@
             android:exported="false"
             android:theme="@style/Theme.EcommerceApp"
             android:windowSoftInputMode="adjustResize">
+        </activity>
+        
+        <!-- Product Detail Activity -->
+        <activity
+            android:name=".ProductDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcommerceApp">
+        </activity>
+        
+        <!-- Reviews Activity -->
+        <activity
+            android:name=".ReviewsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcommerceApp">
+        </activity>
+        
+        <!-- Add Review Activity -->
+        <activity
+            android:name=".AddReviewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcommerceApp">
+        </activity>
+        
+        <!-- Payment Activity -->
+        <activity
+            android:name=".activities.PaymentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcommerceApp">
         </activity>
     </application>
 

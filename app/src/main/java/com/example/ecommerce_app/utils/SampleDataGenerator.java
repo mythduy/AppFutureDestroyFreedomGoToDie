@@ -149,7 +149,7 @@ public class SampleDataGenerator {
         p1.setCategoryId(1); // Vi Điều Khiển
         p1.setSku("ARDUINO_UNO_R3");
         p1.setBrand("Arduino");
-        p1.setImageFilenames(Arrays.asList("arduino_uno.jpg", "arduino_uno_1.jpg", "arduino_uno_2.jpg"));
+        p1.setImageFilenames(Arrays.asList("main.jpg", "image_1.jpg", "image_2.jpg"));
         p1.setSpecifications("{\"voltage\":\"5V\",\"clock\":\"16MHz\",\"flash\":\"32KB\",\"sram\":\"2KB\"}");
         products.add(p1);
         
@@ -162,7 +162,7 @@ public class SampleDataGenerator {
         p2.setCategoryId(1); // Vi Điều Khiển
         p2.setSku("ESP32_DEVKIT_V1");
         p2.setBrand("Espressif");
-        p2.setImageFilenames(Arrays.asList("esp32.jpg", "esp32_1.jpg"));
+        p2.setImageFilenames(Arrays.asList("main.jpg", "image_1.jpg"));
         p2.setSpecifications("{\"voltage\":\"3.3V\",\"wifi\":\"802.11b/g/n\",\"bluetooth\":\"4.2\"}");
         products.add(p2);
         
@@ -175,7 +175,7 @@ public class SampleDataGenerator {
         p3.setCategoryId(2); // Cảm Biến
         p3.setSku("DHT22_SENSOR");
         p3.setBrand("Generic");
-        p3.setImageFilenames(Arrays.asList("dht22.jpg"));
+        p3.setImageFilenames(Arrays.asList("main.jpg"));
         p3.setSpecifications("{\"temp_range\":\"-40~80°C\",\"humidity_range\":\"0-100%RH\",\"accuracy\":\"±0.5°C\"}");
         products.add(p3);
         
@@ -188,7 +188,7 @@ public class SampleDataGenerator {
         p4.setCategoryId(2); // Cảm Biến
         p4.setSku("HC_SR04_ULTRASONIC");
         p4.setBrand("Generic");
-        p4.setImageFilenames(Arrays.asList("hcsr04.jpg"));
+        p4.setImageFilenames(Arrays.asList("main.jpg"));
         p4.setSpecifications("{\"range\":\"2-400cm\",\"accuracy\":\"3mm\",\"voltage\":\"5V\"}");
         products.add(p4);
         
@@ -201,7 +201,7 @@ public class SampleDataGenerator {
         p5.setCategoryId(3); // Module Truyền Thông
         p5.setSku("NRF24L01_PLUS");
         p5.setBrand("Nordic");
-        p5.setImageFilenames(Arrays.asList("nrf24l01.jpg"));
+        p5.setImageFilenames(Arrays.asList("main.jpg"));
         p5.setSpecifications("{\"frequency\":\"2.4GHz\",\"range\":\"100m\",\"data_rate\":\"2Mbps\"}");
         products.add(p5);
         
@@ -214,7 +214,7 @@ public class SampleDataGenerator {
         p6.setCategoryId(5); // Module Hiển Thị
         p6.setSku("OLED_096_I2C");
         p6.setBrand("Generic");
-        p6.setImageFilenames(Arrays.asList("oled_096.jpg", "oled_096_1.jpg"));
+        p6.setImageFilenames(Arrays.asList("main.jpg", "image_1.jpg"));
         p6.setSpecifications("{\"resolution\":\"128x64\",\"interface\":\"I2C\",\"voltage\":\"3.3-5V\"}");
         products.add(p6);
         
@@ -227,7 +227,7 @@ public class SampleDataGenerator {
         p7.setCategoryId(4); // Linh Kiện Điện Tử
         p7.setSku("LED_RGB_5MM_CC");
         p7.setBrand("Generic");
-        p7.setImageFilenames(Arrays.asList("led_rgb.jpg"));
+        p7.setImageFilenames(Arrays.asList("main.jpg"));
         p7.setSpecifications("{\"type\":\"Common Cathode\",\"voltage\":\"2-3.2V\",\"current\":\"20mA\"}");
         products.add(p7);
         
@@ -240,7 +240,7 @@ public class SampleDataGenerator {
         p8.setCategoryId(4); // Linh Kiện Điện Tử
         p8.setSku("BREADBOARD_830");
         p8.setBrand("Generic");
-        p8.setImageFilenames(Arrays.asList("breadboard.jpg"));
+        p8.setImageFilenames(Arrays.asList("main.jpg"));
         p8.setSpecifications("{\"holes\":\"830\",\"size\":\"165x55mm\"}");
         products.add(p8);
         
@@ -253,7 +253,7 @@ public class SampleDataGenerator {
         p9.setCategoryId(5); // Module Hiển Thị
         p9.setSku("LCD_16X2_I2C");
         p9.setBrand("Generic");
-        p9.setImageFilenames(Arrays.asList("lcd_16x2.jpg"));
+        p9.setImageFilenames(Arrays.asList("main.jpg"));
         p9.setSpecifications("{\"display\":\"16x2\",\"interface\":\"I2C\",\"voltage\":\"5V\"}");
         products.add(p9);
         
@@ -266,7 +266,7 @@ public class SampleDataGenerator {
         p10.setCategoryId(4); // Linh Kiện Điện Tử
         p10.setSku("SERVO_SG90");
         p10.setBrand("TowerPro");
-        p10.setImageFilenames(Arrays.asList("servo_sg90.jpg"));
+        p10.setImageFilenames(Arrays.asList("main.jpg"));
         p10.setSpecifications("{\"angle\":\"180°\",\"torque\":\"1.8kg/cm\",\"voltage\":\"4.8-6V\"}");
         products.add(p10);
         
@@ -278,37 +278,137 @@ public class SampleDataGenerator {
      */
     private static List<Review> createSampleReviews() {
         List<Review> reviews = new ArrayList<>();
+        Date now = new Date();
         
-        // Reviews cho Arduino Uno (product id = 1)
+        // Reviews cho Arduino Uno (product id = 1) - 5 reviews
         Review r1 = new Review();
         r1.setUserId(2); // user1
         r1.setProductId(1);
         r1.setRating(5);
-        r1.setComment("Sản phẩm chính hãng, chất lượng tốt, giao hàng nhanh!");
+        r1.setComment("Sản phẩm chính hãng, chất lượng tốt!\n\nGiao hàng nhanh, đóng gói cẩn thận. Board hoạt động ổn định, upload code không có vấn đề gì. Rất hài lòng với sản phẩm!");
+        r1.setCreatedAt(new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000)); // 7 days ago
+        r1.setUpdatedAt(r1.getCreatedAt());
         reviews.add(r1);
         
         Review r2 = new Review();
         r2.setUserId(3); // user2
         r2.setProductId(1);
         r2.setRating(4);
-        r2.setComment("Board tốt, nhưng giá hơi cao so với clone");
+        r2.setComment("Board Arduino chính hãng tốt\n\nChất lượng ổn, nhưng giá hơi cao so với các board clone. Tuy nhiên vẫn đáng đồng tiền bát gạo vì độ tin cậy cao.");
+        r2.setCreatedAt(new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000)); // 5 days ago
+        r2.setUpdatedAt(r2.getCreatedAt());
         reviews.add(r2);
         
-        // Review cho ESP32 (product id = 2)
+        Review r1a = new Review();
+        r1a.setUserId(1); // admin
+        r1a.setProductId(1);
+        r1a.setRating(5);
+        r1a.setComment("Excellent quality board!\n\nPerfect for beginners and professionals. All pins work correctly, no issues with uploading sketches. Highly recommended for Arduino projects.");
+        r1a.setCreatedAt(new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000)); // 3 days ago
+        r1a.setUpdatedAt(r1a.getCreatedAt());
+        reviews.add(r1a);
+        
+        Review r1b = new Review();
+        r1b.setUserId(2); // user1
+        r1b.setProductId(1);
+        r1b.setRating(5);
+        r1b.setComment("Tuyệt vời cho dự án IoT\n\nĐã dùng để làm hệ thống tưới cây tự động, hoạt động rất tốt. Pin nguồn ổn định, không bị reset bất thường.");
+        r1b.setCreatedAt(new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000)); // 2 days ago
+        r1b.setUpdatedAt(r1b.getCreatedAt());
+        reviews.add(r1b);
+        
+        Review r1c = new Review();
+        r1c.setUserId(3); // user2
+        r1c.setProductId(1);
+        r1c.setRating(4);
+        r1c.setComment("Good value for money\n\nThe board works great, good build quality. Only minor issue is the USB cable is a bit short, but that's not a big deal.");
+        r1c.setCreatedAt(new Date(now.getTime() - 1 * 24 * 60 * 60 * 1000)); // 1 day ago
+        r1c.setUpdatedAt(r1c.getCreatedAt());
+        reviews.add(r1c);
+        
+        // Reviews cho ESP32 (product id = 2) - 4 reviews
         Review r3 = new Review();
         r3.setUserId(2); // user1
         r3.setProductId(2);
         r3.setRating(5);
-        r3.setComment("ESP32 rất mạnh, WiFi + Bluetooth hoạt động tốt!");
+        r3.setComment("ESP32 cực kỳ mạnh mẽ!\n\nWiFi + Bluetooth hoạt động rất tốt, xử lý nhanh. Dùng để làm smart home controller, kết nối với app mobile qua WiFi rất mượt.");
+        r3.setCreatedAt(new Date(now.getTime() - 6 * 24 * 60 * 60 * 1000));
+        r3.setUpdatedAt(r3.getCreatedAt());
         reviews.add(r3);
         
-        // Review cho DHT22 (product id = 3)
+        Review r3a = new Review();
+        r3a.setUserId(3); // user2
+        r3a.setProductId(2);
+        r3a.setRating(5);
+        r3a.setComment("Perfect for IoT projects\n\nDual-core processor is very powerful, WiFi range is impressive. Battery life is decent when using deep sleep mode.");
+        r3a.setCreatedAt(new Date(now.getTime() - 4 * 24 * 60 * 60 * 1000));
+        r3a.setUpdatedAt(r3a.getCreatedAt());
+        reviews.add(r3a);
+        
+        Review r3b = new Review();
+        r3b.setUserId(1); // admin
+        r3b.setProductId(2);
+        r3b.setRating(4);
+        r3b.setComment("Rất hài lòng với hiệu năng\n\nESP32 cho phép xử lý đa nhiệm tốt. Tuy nhiên cần cẩn thận về mức điện áp input cho các chân ADC (chỉ chịu được 3.3V).");
+        r3b.setCreatedAt(new Date(now.getTime() - 2 * 24 * 60 * 60 * 1000));
+        r3b.setUpdatedAt(r3b.getCreatedAt());
+        reviews.add(r3b);
+        
+        Review r3c = new Review();
+        r3c.setUserId(2); // user1
+        r3c.setProductId(2);
+        r3c.setRating(5);
+        r3c.setComment("Best MCU for wireless projects!\n\nBuilt-in WiFi and Bluetooth make it super convenient. No need for additional modules. Great documentation and community support.");
+        r3c.setCreatedAt(new Date(now.getTime() - 12 * 60 * 60 * 1000)); // 12 hours ago
+        r3c.setUpdatedAt(r3c.getCreatedAt());
+        reviews.add(r3c);
+        
+        // Reviews cho DHT22 (product id = 3) - 3 reviews
         Review r4 = new Review();
         r4.setUserId(3); // user2
         r4.setProductId(3);
         r4.setRating(5);
-        r4.setComment("Đo nhiệt độ và độ ẩm chính xác, giá hợp lý");
+        r4.setComment("Cảm biến chính xác và bền\n\nĐo nhiệt độ và độ ẩm rất chính xác so với nhiệt kế điện tử. Giá cả hợp lý, đáng mua!");
+        r4.setCreatedAt(new Date(now.getTime() - 8 * 24 * 60 * 60 * 1000));
+        r4.setUpdatedAt(r4.getCreatedAt());
         reviews.add(r4);
+        
+        Review r4a = new Review();
+        r4a.setUserId(1); // admin
+        r4a.setProductId(3);
+        r4a.setRating(4);
+        r4a.setComment("Good sensor for weather monitoring\n\nAccuracy is good, response time is acceptable. Make sure to add a pull-up resistor for reliable operation.");
+        r4a.setCreatedAt(new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000));
+        r4a.setUpdatedAt(r4a.getCreatedAt());
+        reviews.add(r4a);
+        
+        Review r4b = new Review();
+        r4b.setUserId(2); // user1
+        r4b.setProductId(3);
+        r4b.setRating(5);
+        r4b.setComment("Tuyệt vời cho hệ thống giám sát\n\nDùng cho nhà kính, đo ổn định. Có thể đọc dữ liệu mỗi 2 giây mà không bị lỗi. Library của Arduino rất dễ dùng.");
+        r4b.setCreatedAt(new Date(now.getTime() - 6 * 60 * 60 * 1000)); // 6 hours ago
+        r4b.setUpdatedAt(r4b.getCreatedAt());
+        reviews.add(r4b);
+        
+        // Review cho Servo SG90 (product id = 10) - 2 reviews
+        Review r5 = new Review();
+        r5.setUserId(2); // user1
+        r5.setProductId(10);
+        r5.setRating(4);
+        r5.setComment("Servo nhỏ gọn, hoạt động tốt\n\nTrọng lượng nhẹ, phù hợp cho mô hình robot nhỏ. Chạy êm, tiếng ồn ít. Giá rất tốt!");
+        r5.setCreatedAt(new Date(now.getTime() - 5 * 24 * 60 * 60 * 1000));
+        r5.setUpdatedAt(r5.getCreatedAt());
+        reviews.add(r5);
+        
+        Review r5a = new Review();
+        r5a.setUserId(3); // user2
+        r5a.setProductId(10);
+        r5a.setRating(5);
+        r5a.setComment("Perfect for hobby projects\n\nGreat little servo motor, works smoothly. Used it for a pan-tilt camera mount. Very responsive and accurate positioning.");
+        r5a.setCreatedAt(new Date(now.getTime() - 24 * 60 * 60 * 1000)); // 1 day ago
+        r5a.setUpdatedAt(r5a.getCreatedAt());
+        reviews.add(r5a);
         
         return reviews;
     }

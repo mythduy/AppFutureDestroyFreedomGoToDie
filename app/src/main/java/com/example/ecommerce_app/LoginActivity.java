@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.ecommerce_app.utils.SessionManager;
 import com.example.ecommerce_app.viewmodels.AuthViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -17,6 +18,9 @@ import com.google.android.material.textfield.TextInputEditText;
 /**
  * LoginActivity - Màn hình đăng nhập
  * Design từ Figma: 03 Login (node-id=2-910)
+ * 
+ * Luồng mới: User có thể xem sản phẩm trước, chỉ cần login khi checkout
+ * Sau khi login thành công, quay lại màn hình trước đó (Home/Cart/Checkout)
  */
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,11 +29,21 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvCancel, tvForgotPassword;
     
     private AuthViewModel authViewModel;
+    private SessionManager sessionManager;
+    private String returnTo = "HOME"; // Màn hình cần quay lại sau login
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Khởi tạo SessionManager
+        sessionManager = new SessionManager(this);
+        
+        // Lấy thông tin màn hình cần quay lại
+        if (getIntent().hasExtra("RETURN_TO")) {
+            returnTo = getIntent().getStringExtra("RETURN_TO");
+        }
 
         // Khởi tạo ViewModel
         authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
@@ -56,13 +70,16 @@ public class LoginActivity extends AppCompatActivity {
         // Observe login status
         authViewModel.getCurrentUser().observe(this, user -> {
             if (user != null) {
-                // Login thành công, chuyển đến HomeActivity
+                // Login thành công, lưu session
                 Log.d("LoginActivity", "Login successful, user: " + user.getUsername());
+                sessionManager.createLoginSession(user.getId(), user.getUsername(), user.getEmail());
                 Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                 
                 try {
+                    // Quay lại màn hình trước đó
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("NAVIGATE_TO", returnTo);
                     startActivity(intent);
                     finish();
                 } catch (Exception e) {
@@ -94,11 +111,9 @@ public class LoginActivity extends AppCompatActivity {
         // Next button - Login
         btnNext.setOnClickListener(v -> handleLogin());
 
-        // Cancel button - Back to Splash
+        // Cancel button - Back to previous screen (usually Home)
         tvCancel.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this, SplashActivity.class);
-            startActivity(intent);
-            finish();
+            finish(); // Quay lại màn hình trước đó
         });
 
         // Forgot password link

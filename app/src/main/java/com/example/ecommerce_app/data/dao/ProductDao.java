@@ -42,6 +42,12 @@ public interface ProductDao {
     LiveData<List<Product>> getAllProducts();
     
     /**
+     * Lấy tất cả products (sync - cho export)
+     */
+    @Query("SELECT * FROM products ORDER BY createdAt DESC")
+    List<Product> getAllProductsSync();
+    
+    /**
      * Lấy product theo ID
      */
     @Query("SELECT * FROM products WHERE id = :productId")

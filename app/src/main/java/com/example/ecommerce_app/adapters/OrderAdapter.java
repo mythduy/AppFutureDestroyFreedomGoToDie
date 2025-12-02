@@ -76,9 +76,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         Product product = orderWithDetails.product;
 
         // Set product image
-        if (product != null && product.getImageFilenames() != null && !product.getImageFilenames().isEmpty()) {
-            String imageFilename = product.getImageFilenames().get(0);
-            String imagePath = ImageHelper.getProductImagePath(imageFilename);
+        if (product != null) {
+            String imagePath = ImageHelper.getProductMainImagePath(product.getId());
             ImageHelper.loadImageFromAssets(context, imagePath, holder.ivProductImage);
         } else {
             holder.ivProductImage.setImageResource(R.drawable.ic_launcher_background);

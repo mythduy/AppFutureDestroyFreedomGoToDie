@@ -22,6 +22,7 @@ import com.example.ecommerce_app.data.dao.ProductDao;
 import com.example.ecommerce_app.data.entities.Order;
 import com.example.ecommerce_app.data.entities.OrderItem;
 import com.example.ecommerce_app.data.entities.Product;
+import com.example.ecommerce_app.utils.SessionManager;
 import com.example.ecommerce_app.viewmodels.OrderViewModel;
 import com.google.android.material.tabs.TabLayout;
 
@@ -33,6 +34,7 @@ import java.util.concurrent.Executors;
 /**
  * MyOrderFragment - Shows user's order history with tab filtering
  * Tabs: My Order (in progress orders) and History (completed/cancelled orders)
+ * Yêu cầu login trước khi xem đơn hàng
  */
 public class MyOrderFragment extends Fragment {
 
@@ -41,6 +43,7 @@ public class MyOrderFragment extends Fragment {
     private OrderViewModel orderViewModel;
     private TabLayout tabLayout;
     private View emptyState;
+    private SessionManager sessionManager;
     
     private AppDatabase database;
     private OrderItemDao orderItemDao;
@@ -53,6 +56,15 @@ public class MyOrderFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_order, container, false);
+
+        // Khởi tạo SessionManager
+        sessionManager = new SessionManager(requireContext());
+        
+        // Kiểm tra login - yêu cầu đăng nhập để xem đơn hàng
+        if (!sessionManager.checkLoginRequired(requireContext(), "ORDER")) {
+            // Chưa login, đã chuyển sang LoginActivity
+            return view;
+        }
 
         // Initialize database
         database = AppDatabase.getInstance(requireContext());

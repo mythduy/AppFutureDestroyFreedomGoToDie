@@ -5,9 +5,11 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.example.ecommerce_app.data.entities.Review;
+import com.example.ecommerce_app.data.models.ReviewWithUser;
 
 import java.util.List;
 
@@ -80,6 +82,16 @@ public interface ReviewDao {
      */
     @Query("SELECT * FROM reviews WHERE productId = :productId ORDER BY rating DESC, createdAt DESC LIMIT :limit")
     LiveData<List<Review>> getTopReviews(long productId, int limit);
+    
+    /**
+     * Lấy reviews với user info (JOIN)
+     * Note: Room không tự động map ReviewWithUser, cần xử lý trong Repository
+     */
+    @Query("SELECT * FROM reviews WHERE productId = :productId ORDER BY createdAt DESC")
+    List<Review> getReviewsWithUserSync(long productId);
+    
+    @Query("SELECT * FROM reviews WHERE productId = :productId ORDER BY createdAt DESC LIMIT :limit")
+    List<Review> getReviewsWithUserLimitSync(long productId, int limit);
     
     // ==================== UPDATE ====================
     

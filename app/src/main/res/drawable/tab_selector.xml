@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selected state - longer dark bar -->
+    <item android:state_selected="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="2dp" />
+            <size android:width="32dp" android:height="3dp" />
+            <solid android:color="#1D1E20" />
+        </shape>
+    </item>
+    
+    <!-- Unselected state - shorter light bar -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="2dp" />
+            <size android:width="12dp" android:height="3dp" />
+            <solid android:color="#D9D9D9" />
+        </shape>
+    </item>
+</selector>

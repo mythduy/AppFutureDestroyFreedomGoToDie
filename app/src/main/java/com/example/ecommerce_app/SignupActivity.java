@@ -57,9 +57,17 @@ public class SignupActivity extends AppCompatActivity {
         // Observe registration status
         authViewModel.getCurrentUser().observe(this, user -> {
             if (user != null) {
-                // Đăng ký và login thành công
+                // Đăng ký và login thành công - Lưu session
+                com.example.ecommerce_app.utils.SessionManager sessionManager = 
+                    new com.example.ecommerce_app.utils.SessionManager(this);
+                sessionManager.createLoginSession(user.getId(), user.getUsername(), user.getEmail());
+                
                 Toast.makeText(this, "Tạo tài khoản thành công!", Toast.LENGTH_SHORT).show();
-                // TODO: Navigate to MainActivity
+                
+                // Navigate to HomeActivity
+                Intent intent = new Intent(SignupActivity.this, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
             }
         });
@@ -86,10 +94,8 @@ public class SignupActivity extends AppCompatActivity {
         // Done button - Register
         btnDone.setOnClickListener(v -> handleSignup());
 
-        // Cancel button - Back to Splash
+        // Cancel button - Back to Welcome
         tvCancel.setOnClickListener(v -> {
-            Intent intent = new Intent(SignupActivity.this, SplashActivity.class);
-            startActivity(intent);
             finish();
         });
 
@@ -111,11 +117,21 @@ public class SignupActivity extends AppCompatActivity {
         if (!validateInputs(name, phone, email, password)) {
             return;
         }
-
+        
+        // Generate username from name (use name as username)
+        // Remove spaces and special characters, convert to lowercase
+        String username = name.toLowerCase()
+                .replaceAll("\\s+", "")  // Remove spaces
+                .replaceAll("[^a-z0-9]", "");  // Remove special characters
+        
+        // If username is empty after cleaning, use email prefix
+        if (username.isEmpty() && !email.isEmpty()) {
+            username = email.split("@")[0].replaceAll("[^a-z0-9]", "");
+        }
+        
         // Perform registration
-        // Note: Using email as username since UI doesn't have separate username field
         // Parameters: username, email, password, fullName, phone
-        authViewModel.register(email, email, password, name, phone);
+        authViewModel.register(username, email, password, name, phone);
     }
 
     private boolean validateInputs(String name, String phone, String email, String password) {

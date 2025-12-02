@@ -22,6 +22,7 @@ import com.example.ecommerce_app.data.database.AppDatabase;
 import com.example.ecommerce_app.data.dao.ProductDao;
 import com.example.ecommerce_app.data.entities.Favorite;
 import com.example.ecommerce_app.data.entities.Product;
+import com.example.ecommerce_app.utils.SessionManager;
 import com.example.ecommerce_app.viewmodels.FavoriteViewModel;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -48,6 +49,8 @@ public class FavoriteFragment extends Fragment {
     private AppDatabase database;
     private ProductDao productDao;
     private ExecutorService executorService;
+    private SessionManager sessionManager;
+    private long userId;
     
     private List<Product> allFavoriteProducts = new ArrayList<>();
     private String currentFilter = "ALL";
@@ -63,6 +66,10 @@ public class FavoriteFragment extends Fragment {
         database = AppDatabase.getInstance(requireContext());
         productDao = database.productDao();
         executorService = Executors.newSingleThreadExecutor();
+        
+        // Get user ID from session
+        sessionManager = new SessionManager(requireContext());
+        userId = sessionManager.getUserId();
 
         // Initialize views
         recyclerFavorites = view.findViewById(R.id.recycler_favorites);
@@ -101,8 +108,10 @@ public class FavoriteFragment extends Fragment {
         // Setup ViewModel
         favoriteViewModel = new ViewModelProvider(this).get(FavoriteViewModel.class);
         
-        // Set user ID (TODO: Get from session/SharedPreferences)
-        favoriteViewModel.setUserId(1); // Temporary hardcoded user ID
+        // Set user ID from session
+        if (userId > 0) {
+            favoriteViewModel.setUserId(userId);
+        }
 
         // Observe favorites
         favoriteViewModel.getFavorites().observe(getViewLifecycleOwner(), favorites -> {
@@ -152,6 +161,22 @@ public class FavoriteFragment extends Fragment {
         chipGroup.check(R.id.chip_all);
 
         return view;
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Reload favorites when fragment becomes visible again
+        refreshFavorites();
+    }
+    
+    /**
+     * Refresh favorites list - public method for external refresh
+     */
+    public void refreshFavorites() {
+        if (favoriteViewModel != null && userId > 0) {
+            favoriteViewModel.setUserId(userId);
+        }
     }
 
     /**

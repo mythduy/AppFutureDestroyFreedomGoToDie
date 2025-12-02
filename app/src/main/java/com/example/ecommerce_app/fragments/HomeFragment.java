@@ -80,7 +80,12 @@ public class HomeFragment extends Fragment {
         productAdapter.setOnProductClickListener(new ProductAdapter.OnProductClickListener() {
             @Override
             public void onProductClick(Product product) {
-                // TODO: Navigate to product detail
+                // Navigate to product detail
+                android.content.Intent intent = new android.content.Intent(getActivity(), 
+                    com.example.ecommerce_app.ProductDetailActivity.class);
+                intent.putExtra(com.example.ecommerce_app.ProductDetailActivity.EXTRA_PRODUCT_ID, 
+                    product.getId());
+                startActivity(intent);
             }
 
             @Override
@@ -173,5 +178,14 @@ public class HomeFragment extends Fragment {
                         .commit();
             }
         });
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh username khi quay lại fragment (sau login/logout)
+        if (viewModel != null) {
+            viewModel.refreshUserName();
+        }
     }
 }

@@ -95,13 +95,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productBrand.setText(product.getBrand() != null ? product.getBrand() : "");
             productPrice.setText(String.format(Locale.US, "$%.2f", product.getPrice()));
 
-            // Load product image
-            if (product.getImageFilenames() != null && !product.getImageFilenames().isEmpty()) {
-                String imagePath = "images/products/" + product.getImageFilenames().get(0);
-                ImageHelper.loadImageFromAssets(context, imagePath, productImage);
-            } else {
-                productImage.setImageResource(R.drawable.ic_launcher_background);
-            }
+            // Load product image theo cấu trúc MỚI: products/product_{id}/main.jpg
+            String imagePath = ImageHelper.getProductMainImagePath(product.getId());
+            ImageHelper.loadImageFromAssets(context, imagePath, productImage);
         }
     }
 

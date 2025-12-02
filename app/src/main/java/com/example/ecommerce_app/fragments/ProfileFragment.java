@@ -20,18 +20,21 @@ import com.example.ecommerce_app.activities.EditProfileActivity;
 import com.example.ecommerce_app.activities.ChangePasswordActivity;
 import com.example.ecommerce_app.data.database.AppDatabase;
 import com.example.ecommerce_app.data.entities.User;
+import com.example.ecommerce_app.utils.SessionManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
  * ProfileFragment - User profile and settings screen
+ * Yêu cầu login trước khi truy cập
  */
 public class ProfileFragment extends Fragment {
 
     private ImageView profileImage;
     private TextView usernameText;
     private TextView emailText;
+    private SessionManager sessionManager;
     
     private LinearLayout editProfileItem;
     private LinearLayout changePasswordItem;
@@ -50,6 +53,15 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
+        
+        // Khởi tạo SessionManager
+        sessionManager = new SessionManager(requireContext());
+        
+        // Kiểm tra login - yêu cầu đăng nhập để xem profile
+        if (!sessionManager.checkLoginRequired(requireContext(), "PROFILE")) {
+            // Chưa login, đã chuyển sang LoginActivity
+            return view;
+        }
         
         initializeViews(view);
         initializeDatabase();
@@ -92,15 +104,25 @@ public class ProfileFragment extends Fragment {
     
     private void loadUserProfile() {
         executorService.execute(() -> {
-            // For demo, get the first user or use a default user
-            User user = database.userDao().getAllUsersSync().stream().findFirst().orElse(null);
+            // Lấy user từ session
+            long userId = sessionManager.getUserId();
+            User user = null;
+            
+            if (userId > 0) {
+                user = database.userDao().getUserByIdSync(userId);
+            }
             
             if (user == null) {
-                // Create a default demo user if none exists
-                user = new User();
-                user.setUsername("Magdalena Succrose");
-                user.setEmail("magdalena83@gmail.com");
-                user.setFullName("Magdalena Succrose");
+                // Nếu không tìm thấy, lấy user đầu tiên hoặc tạo demo user
+                user = database.userDao().getAllUsersSync().stream().findFirst().orElse(null);
+                
+                if (user == null) {
+                    // Tạo default demo user
+                    user = new User();
+                    user.setUsername(sessionManager.getUsername());
+                    user.setEmail(sessionManager.getEmail());
+                    user.setFullName(sessionManager.getUsername());
+                }
             }
             
             currentUser = user;
@@ -145,10 +167,19 @@ public class ProfileFragment extends Fragment {
     }
     
     private void performLogout() {
-        // TODO: Clear user session/preferences
+        // Xóa session
+        sessionManager.logout();
         Toast.makeText(requireContext(), "Logged out successfully", Toast.LENGTH_SHORT).show();
-        // TODO: Navigate to login screen
-        requireActivity().finish();
+        
+        // Quay về WelcomeActivity
+        Intent intent = new Intent(requireContext(), com.example.ecommerce_app.WelcomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        
+        // Đóng HomeActivity
+        if (getActivity() != null) {
+            getActivity().finish();
+        }
     }
     
     @Override

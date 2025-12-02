@@ -11,6 +11,7 @@ import com.example.ecommerce_app.data.entities.Category;
 import com.example.ecommerce_app.data.entities.Product;
 import com.example.ecommerce_app.data.repository.CategoryRepository;
 import com.example.ecommerce_app.data.repository.ProductRepository;
+import com.example.ecommerce_app.utils.SessionManager;
 
 import java.util.List;
 
@@ -21,19 +22,35 @@ public class HomeViewModel extends AndroidViewModel {
     
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
+    private SessionManager sessionManager;
     
     private LiveData<List<Product>> newArrivals;
     private LiveData<List<Product>> bestSelling;
     private LiveData<List<Category>> categories;
     
-    private MutableLiveData<String> userName = new MutableLiveData<>("Jonathan");
+    private MutableLiveData<String> userName = new MutableLiveData<>();
     
     public HomeViewModel(@NonNull Application application) {
         super(application);
         productRepository = new ProductRepository(application);
         categoryRepository = new CategoryRepository(application);
+        sessionManager = new SessionManager(application);
+        
+        // Load username từ session
+        loadUserName();
         
         loadData();
+    }
+    
+    /**
+     * Load username từ session hoặc hiển thị "Guest" nếu chưa đăng nhập
+     */
+    private void loadUserName() {
+        if (sessionManager.isLoggedIn()) {
+            userName.setValue(sessionManager.getUsername());
+        } else {
+            userName.setValue("Guest");
+        }
     }
     
     /**
@@ -83,6 +100,13 @@ public class HomeViewModel extends AndroidViewModel {
      */
     public void setUserName(String name) {
         userName.setValue(name);
+    }
+    
+    /**
+     * Refresh username từ session (gọi sau khi login/logout)
+     */
+    public void refreshUserName() {
+        loadUserName();
     }
     
     /**

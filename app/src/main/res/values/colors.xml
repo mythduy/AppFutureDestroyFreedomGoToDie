@@ -10,6 +10,7 @@
     <color name="dark_background_light">#2C3E50</color>
     
     <!-- Primary Colors -->
+    <color name="primary">#6055D8</color>
     <color name="primary_purple">#6055D8</color>
     <color name="primary_purple_light">#7C6FE8</color>
     

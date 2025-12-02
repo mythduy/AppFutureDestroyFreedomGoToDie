@@ -59,12 +59,15 @@ public class UserRepository {
     }
     
     /**
-     * Đăng nhập
+     * Đăng nhập bằng email
+     * @param email Email của user
+     * @param password Mật khẩu
      * @return User nếu thành công, null nếu thất bại
      */
-    public Future<User> login(String username, String password) {
+    public Future<User> login(String email, String password) {
         return AppDatabase.databaseWriteExecutor.submit(() -> {
-            User user = userDao.findByUsername(username);
+            // Tìm user theo email (vì LoginActivity nhập email)
+            User user = userDao.findByEmail(email);
             
             if (user == null) {
                 return null; // User không tồn tại

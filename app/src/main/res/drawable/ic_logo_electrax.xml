@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- ElectraX Logo - Electronic Shop Cart with Circuit Board Design -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    
+    <!-- Shopping Cart Base -->
+    <path
+        android:pathData="M40,140 L60,60 L160,60 L140,140 Z"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="3"
+        android:fillColor="#00000000" />
+    
+    <!-- Cart Handle -->
+    <path
+        android:pathData="M60,60 L50,40"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="3"
+        android:strokeLineCap="round" />
+    
+    <!-- Left Wheel Outer -->
+    <path
+        android:pathData="M 62,155 A 8,8 0 1,1 78,155 A 8,8 0 1,1 62,155"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="3"
+        android:fillColor="#00000000" />
+    
+    <!-- Left Wheel Center -->
+    <path
+        android:pathData="M 67,155 A 3,3 0 1,1 73,155 A 3,3 0 1,1 67,155"
+        android:fillColor="#4FC3F7" />
+    
+    <!-- Right Wheel Outer -->
+    <path
+        android:pathData="M 122,155 A 8,8 0 1,1 138,155 A 8,8 0 1,1 122,155"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="3"
+        android:fillColor="#00000000" />
+    
+    <!-- Right Wheel Center -->
+    <path
+        android:pathData="M 127,155 A 3,3 0 1,1 133,155 A 3,3 0 1,1 127,155"
+        android:fillColor="#4FC3F7" />
+    
+    <!-- Central Chip/Processor -->
+    <path
+        android:pathData="M90,90 L110,90 L110,110 L90,110 Z"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="2"
+        android:fillColor="#1E3A5F" />
+    
+    <!-- Chip Lines -->
+    <path
+        android:pathData="M95,100 L105,100 M95,95 L105,95 M95,105 L105,105"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="1" />
+    
+    <!-- Circuit Lines - Top -->
+    <path
+        android:pathData="M100,80 L100,90"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="2" />
+    
+    <path
+        android:pathData="M 97,75 A 3,3 0 1,1 103,75 A 3,3 0 1,1 97,75"
+        android:fillColor="#4FC3F7" />
+    
+    <!-- Circuit Lines - Bottom -->
+    <path
+        android:pathData="M100,110 L100,120"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="2" />
+    
+    <path
+        android:pathData="M 97,125 A 3,3 0 1,1 103,125 A 3,3 0 1,1 97,125"
+        android:fillColor="#4FC3F7" />
+    
+    <!-- Circuit Lines - Left -->
+    <path
+        android:pathData="M80,100 L90,100"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="2" />
+    
+    <path
+        android:pathData="M 72,100 A 3,3 0 1,1 78,100 A 3,3 0 1,1 72,100"
+        android:fillColor="#4FC3F7" />
+    
+    <!-- Circuit Lines - Right -->
+    <path
+        android:pathData="M110,100 L120,100"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="2" />
+    
+    <path
+        android:pathData="M 122,100 A 3,3 0 1,1 128,100 A 3,3 0 1,1 122,100"
+        android:fillColor="#4FC3F7" />
+    
+    <!-- Additional Circuit Nodes -->
+    <path
+        android:pathData="M 77.5,80 A 2.5,2.5 0 1,1 82.5,80 A 2.5,2.5 0 1,1 77.5,80"
+        android:fillColor="#4FC3F7" />
+    
+    <path
+        android:pathData="M 117.5,80 A 2.5,2.5 0 1,1 122.5,80 A 2.5,2.5 0 1,1 117.5,80"
+        android:fillColor="#4FC3F7" />
+    
+    <path
+        android:pathData="M 77.5,120 A 2.5,2.5 0 1,1 82.5,120 A 2.5,2.5 0 1,1 77.5,120"
+        android:fillColor="#4FC3F7" />
+    
+    <path
+        android:pathData="M 117.5,120 A 2.5,2.5 0 1,1 122.5,120 A 2.5,2.5 0 1,1 117.5,120"
+        android:fillColor="#4FC3F7" />
+    
+    <!-- Connecting Lines -->
+    <path
+        android:pathData="M80,80 L75,75 M120,80 L125,75 M80,120 L75,125 M120,120 L125,125"
+        android:strokeColor="#4FC3F7"
+        android:strokeWidth="1.5" />
+    
+</vector>

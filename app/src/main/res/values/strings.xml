@@ -13,6 +13,7 @@
     <string name="nav_home">Home</string>
     <string name="nav_category">Category</string>
     <string name="nav_my_order">My Orders</string>
+    <string name="nav_cart">Cart</string>
     <string name="nav_favorite">Favorite</string>
     <string name="nav_profile">My Profile</string>
     
@@ -117,4 +118,46 @@
     <string name="logout_message">Are you sure you want to logout?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    
+    <!-- Welcome Screen -->
+    <string name="welcome_title">Welcome!</string>
+    <string name="welcome_subtitle">Shop the latest electronics and gadgets</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="electronic_shop_background">Electronic Shop Background</string>
+    
+    <!-- Register Screen -->
+    <string name="create_account">Create Account</string>
+    <string name="sign_up_subtitle">Fill in the details to get started</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="signing_up">Signing up…</string>
+    <string name="register_success">Registration successful!</string>
+    
+    <!-- Validation Errors -->
+    <string name="error_full_name_required">Full name is required</string>
+    <string name="error_username_required">Username is required</string>
+    <string name="error_username_length">Username must be at least 3 characters</string>
+    <string name="error_email_required">Email is required</string>
+    <string name="error_invalid_email">Invalid email address</string>
+    <string name="error_phone_required">Phone number is required</string>
+    <string name="error_password_required">Password is required</string>
+    <string name="error_password_length">Password must be at least 6 characters</string>
+    <string name="error_confirm_password_required">Please confirm your password</string>
+    <string name="error_passwords_not_match">Passwords do not match</string>
+    
+    <!-- Cart Screen -->
+    <string name="my_cart">My Cart</string>
+    <string name="cart_empty">Your cart is empty</string>
+    <string name="cart_empty_subtitle">Start adding products you love!</string>
+    <string name="checkout">Checkout</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="quantity">Quantity:</string>
+    <string name="remove_from_cart">Remove from cart</string>
+    <string name="color_label">Color: %s</string>
+    <string name="cart_total">Total: $%.2f</string>
+    <string name="item_removed">Item removed from cart</string>
+    <string name="update_quantity_failed">Failed to update quantity</string>
 </resources>

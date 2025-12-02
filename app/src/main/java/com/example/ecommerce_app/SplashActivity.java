@@ -2,44 +2,48 @@ package com.example.ecommerce_app;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.os.Handler;
+import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ecommerce_app.utils.SessionManager;
+
+/**
+ * SplashActivity - Màn hình splash
+ * Luồng: 
+ * - Nếu đã login: Splash → Home
+ * - Nếu chưa login: Splash → Welcome (chọn Sign Up / Login / Continue as Guest)
+ */
 public class SplashActivity extends AppCompatActivity {
 
-    private Button btnGetStarted;
-    private LinearLayout layoutSignIn;
+    private static final int SPLASH_DELAY = 2000; // 2 seconds
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // Initialize views
-        btnGetStarted = findViewById(R.id.btnGetStarted);
-        layoutSignIn = findViewById(R.id.layoutSignIn);
+        sessionManager = new SessionManager(this);
 
-        // Set up click listeners
-        btnGetStarted.setOnClickListener(new View.OnClickListener() {
+        // Sau 2 giây, kiểm tra login status
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                // Navigate to Signup screen
-                Intent intent = new Intent(SplashActivity.this, SignupActivity.class);
+            public void run() {
+                Intent intent;
+                
+                if (sessionManager.isLoggedIn()) {
+                    // Đã login, vào Home
+                    intent = new Intent(SplashActivity.this, HomeActivity.class);
+                } else {
+                    // Chưa login, vào Welcome để chọn Sign Up/Login/Guest
+                    intent = new Intent(SplashActivity.this, WelcomeActivity.class);
+                }
+                
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 finish();
             }
-        });
-
-        layoutSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Navigate to Login screen
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        }, SPLASH_DELAY);
     }
 }

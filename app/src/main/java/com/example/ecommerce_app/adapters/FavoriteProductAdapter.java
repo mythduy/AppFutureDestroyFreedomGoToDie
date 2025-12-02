@@ -79,14 +79,9 @@ public class FavoriteProductAdapter extends RecyclerView.Adapter<FavoriteProduct
         // Set price
         holder.tvProductPrice.setText(String.format(Locale.getDefault(), "$%.2f", product.getPrice()));
 
-        // Load product image
-        if (product.getImageFilenames() != null && !product.getImageFilenames().isEmpty()) {
-            String imageFilename = product.getImageFilenames().get(0);
-            String imagePath = ImageHelper.getProductImagePath(imageFilename);
-            ImageHelper.loadImageFromAssets(context, imagePath, holder.ivProductImage);
-        } else {
-            holder.ivProductImage.setImageResource(R.drawable.ic_launcher_background);
-        }
+        // Load product image theo cấu trúc MỚI: products/product_{id}/main.jpg
+        String imagePath = ImageHelper.getProductMainImagePath(product.getId());
+        ImageHelper.loadImageFromAssets(context, imagePath, holder.ivProductImage);
 
         // Set favorite icon (always filled in favorite list)
         holder.ivFavorite.setImageResource(R.drawable.ic_favorite_filled);
