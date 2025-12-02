@@ -51,6 +51,22 @@
             android:exported="false"
             android:theme="@style/Theme.EcommerceApp">
         </activity>
+        
+        <!-- Edit Profile Activity -->
+        <activity
+            android:name=".activities.EditProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcommerceApp"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
+        
+        <!-- Change Password Activity -->
+        <activity
+            android:name=".activities.ChangePasswordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EcommerceApp"
+            android:windowSoftInputMode="adjustResize">
+        </activity>
     </application>
 
 </manifest>

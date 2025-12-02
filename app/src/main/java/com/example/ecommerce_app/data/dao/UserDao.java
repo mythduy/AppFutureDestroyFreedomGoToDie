@@ -43,6 +43,12 @@ public interface UserDao {
     LiveData<List<User>> getAllUsers();
     
     /**
+     * Lấy tất cả users (synchronous, không dùng LiveData)
+     */
+    @Query("SELECT * FROM users ORDER BY createdAt DESC")
+    List<User> getAllUsersSync();
+    
+    /**
      * Lấy user theo ID
      */
     @Query("SELECT * FROM users WHERE id = :userId")

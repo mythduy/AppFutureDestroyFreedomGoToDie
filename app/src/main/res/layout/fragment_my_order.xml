@@ -4,70 +4,59 @@
     xmlns:tools="http://schemas.android.com/apk/res/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="#F8F9FA">
 
-    <!-- Header -->
-    <LinearLayout
+    <!-- Header with Title and Cart Icon -->
+    <RelativeLayout
         android:id="@+id/header_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp"
+        android:background="@android:color/white"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/my_orders"
+            android:text="My Order"
             android:textColor="@color/text_primary"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerInParent="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="@string/my_orders_subtitle"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/iv_cart"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_shopping_bag"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/shopping_bag" />
+    </RelativeLayout>
 
-    <!-- Tabs -->
+    <!-- Tabs - My Order and History -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
+        android:background="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/header_layout"
         app:tabIndicatorColor="@color/primary_purple"
-        app:tabSelectedTextColor="@color/primary_purple"
-        app:tabTextColor="@color/text_secondary"
-        app:tabMode="scrollable">
+        app:tabIndicatorHeight="2dp"
+        app:tabSelectedTextColor="@color/text_primary"
+        app:tabTextColor="@color/text_light"
+        app:tabMode="fixed"
+        app:tabGravity="fill">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/all_orders" />
+            android:text="My Order" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pending" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/processing" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/completed" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancelled" />
+            android:text="History" />
     </com.google.android.material.tabs.TabLayout>
 
     <!-- Order List -->
@@ -77,6 +66,7 @@
         android:layout_height="0dp"
         android:padding="16dp"
         android:clipToPadding="false"
+        android:background="#F8F9FA"
         app:layout_constraintTop_toBottomOf="@id/tab_layout"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -96,7 +86,7 @@
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:src="@drawable/ic_my_order"
+            android:src="@drawable/ic_shopping_bag"
             android:alpha="0.3"
             android:contentDescription="@string/no_orders" />
 

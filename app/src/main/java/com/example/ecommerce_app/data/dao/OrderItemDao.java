@@ -40,6 +40,12 @@ public interface OrderItemDao {
     List<OrderItem> getOrderItemsByOrderSync(long orderId);
     
     /**
+     * Lấy tất cả items của một order (sync) - Alternative method name
+     */
+    @Query("SELECT * FROM order_items WHERE orderId = :orderId")
+    List<OrderItem> getOrderItemsSync(long orderId);
+    
+    /**
      * Lấy order item theo ID
      */
     @Query("SELECT * FROM order_items WHERE id = :orderItemId")

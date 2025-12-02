@@ -30,4 +30,10 @@
     <!-- Icon Colors -->
     <color name="icon_inactive">#9CA3AF</color>
     <color name="icon_active">#6055D8</color>
+    
+    <!-- Status Colors -->
+    <color name="status_pending">#F59E0B</color>
+    <color name="status_progress">#0EA5E9</color>
+    <color name="status_completed">#10B981</color>
+    <color name="status_cancelled">#EF4444</color>
 </resources>
